@@ -1,14 +1,14 @@
 # CPER2_G3
 ## Orologion
 ## Project work, richieste:
-API Rest per acquisizione dati (C#/fastify) da smartwatch e salvataggio su db (Qualcosa)  
-da gestire nel cloud (Azure)  
-Applicazione web per la visualizzazione dei dati del proprio orologio (React/Blazor)  
-da gestire nel cloud  
-Applicazione web per il test dei dispositivi (usata dall’azienda produttrice), come da specifiche del documento d’esame (React/Blazor)  
-da gestire on premise  
-i dati dei lotti di produzione non devono essere inviati nel cloud, ma rimanere solo all'interno dell'azienda  
-gli ultimi dati degli orologi o le anomalie devono venir recuperate dal cloud  
+- API Rest per acquisizione dati (C#/fastify) da smartwatch e salvataggio su db (Qualcosa)
+  - da gestire nel cloud (Azure)  
+- Applicazione web per la visualizzazione dei dati del proprio orologio (React/Blazor)  
+  - da gestire nel cloud  
+- Applicazione web per il test dei dispositivi (usata dall’azienda produttrice), come da specifiche del documento d’esame (React/Blazor)  
+  - da gestire on premise  
+- i dati dei lotti di produzione non devono essere inviati nel cloud, ma rimanere solo all'interno dell'azienda  
+- gli ultimi dati degli orologi o le anomalie devono venir recuperate dal cloud  
 
 ### Descrizione del Sistema
 
