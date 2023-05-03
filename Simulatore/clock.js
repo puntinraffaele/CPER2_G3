@@ -1,10 +1,13 @@
 // Prima bozza molto brutta di un simulatore di smartwatch
+const clockID = require('uuid').v4()
+console.log('Activities for clock:', clockID)
 const sessionUUID = require('uuid').v4()
 let pools = 0
 let bpm = 0
 let position = {
     latitude: (Math.random() * 180) - 90,
-    longitude: (Math.random() * 360) -180}
+    longitude: (Math.random() * 360) -180
+}
 
 function generateStartingBpm(min, max) {
     min = Math.ceil(min);
@@ -22,7 +25,7 @@ function getBpm() {
 
 const sim = () => {
     let random = Math.random()
-    if(random < 0.15){
+    if(random < 1){
         position.latitude += Math.random()
         position.longitude += Math.random()
     }
@@ -46,23 +49,26 @@ const sim = () => {
     if(random >= 0.9){
         position.longitude += Math.random()
     }
-    if(position.latitude > 90){
-        
+    if(position.latitude >= 90 ){
+        let delta = 90 - position.latitude
+        position.latitude = 90 + delta
+        position.longitude -= 180
     }
     if(position.latitude < -90){
-
+        let delta = -90 - position.latitude
+        position.latitude = -90 + delta
+        position.longitude -= 180
     }
     if(position.longitude > 180){
-        let delta = position.longitude - 180
-        position.longitude = -180 + delta
+        position.longitude = ((position.longitude + 180) % 360) - 180
     }
     if(position.longitude <= -180){
-        let delta = position.longitude + 180
-        position.longitude = 180 - delta
+        position.longitude = ((position.longitude - 180) % 360) + 180
     }
     getBpm()
     let res = {
         sessionUUID,
+        activityUUID: require('uuid').v4(),
         pools,
         bpm,
         position,
@@ -71,4 +77,4 @@ const sim = () => {
     console.log(res)
 }
 sim()
-setInterval(sim, 10000)
+setInterval(sim, 100)
