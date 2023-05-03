@@ -50,10 +50,16 @@
 
 #### DB [tba]
 
-### db [poveri]
+### db [utenti]
 
 Tabella dati orologio
 - guid orologio
+- guid sessione
+- reset (?)
+- userid (?)
+
+Tabella attività
+- guid sessione
 - guid attività
 - conteggio vasche
 - battiti
@@ -62,8 +68,6 @@ Tabella dati orologio
 - velocità
 - temperatura corporea
 - temperatura esterna
-- reset (?)
-- userid (?)
 
 Tabella dati utente (?)
 - userid
@@ -76,7 +80,7 @@ Tabella dati utente (?)
 - password
 - indirizzo casa
 
-### db[azz]
+### db[azienda]
 Tabella orologio
 - guid orologio
 - batch id
