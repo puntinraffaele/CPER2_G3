@@ -12,6 +12,8 @@
 
 ### Descrizione del Sistema
 
+Assumiamo che, al momento della fabbricazione di ogni batch di orologi, il loro GUID e quello del loro batch venga inserito nel db on prem.
+
 #### Orologio
 	- GUID
 	- Ogni 10 sec all API

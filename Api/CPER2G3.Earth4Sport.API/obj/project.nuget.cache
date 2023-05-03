@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "3YPmLafL06kwZ3DV+ZoQnhlkzL18i3BsVrnNg58E/z72krRHvS8771vRLJbabEl6qJhC7LHt2hQsyk4V86PXcQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\Azure\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\RaffaelePuntin\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\RaffaelePuntin\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\RaffaelePuntin\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\RaffaelePuntin\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\RaffaelePuntin\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\RaffaelePuntin\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
