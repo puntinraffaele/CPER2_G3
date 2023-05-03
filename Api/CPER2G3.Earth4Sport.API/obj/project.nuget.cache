@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3YPmLafL06kwZ3DV+ZoQnhlkzL18i3BsVrnNg58E/z72krRHvS8771vRLJbabEl6qJhC7LHt2hQsyk4V86PXcQ==",
+  "dgSpecHash": "PqOgKq1AcC/kw4VyJwtSEz+7FZpMCCUmIpU4QaafI1ByFm47JndLtI5HUJW6zbCoPRHNFQRm/Yoq/FEiKnPzqw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\Azure\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj",
+  "projectFilePath": "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\CPER2_G3\\CPER2_G3\\Api\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\RaffaelePuntin\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\RaffaelePuntin\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

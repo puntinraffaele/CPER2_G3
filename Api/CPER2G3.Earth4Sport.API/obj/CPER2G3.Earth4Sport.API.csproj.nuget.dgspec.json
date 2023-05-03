@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\Azure\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj": {}
+    "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\CPER2_G3\\CPER2_G3\\Api\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\Azure\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj": {
+    "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\CPER2_G3\\CPER2_G3\\Api\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\Azure\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj",
+        "projectUniqueName": "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\CPER2_G3\\CPER2_G3\\Api\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj",
         "projectName": "CPER2G3.Earth4Sport.API",
-        "projectPath": "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\Azure\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj",
+        "projectPath": "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\CPER2_G3\\CPER2_G3\\Api\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API.csproj",
         "packagesPath": "C:\\Users\\RaffaelePuntin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\Azure\\CPER2G3.Earth4Sport.API\\CPER2G3.Earth4Sport.API\\obj\\",
+        "outputPath": "C:\\Users\\RaffaelePuntin\\Documents\\Corso_ITS\\CPER2_G3\\CPER2_G3\\Api\\CPER2G3.Earth4Sport.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

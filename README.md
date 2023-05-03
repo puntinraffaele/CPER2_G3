@@ -29,6 +29,9 @@ Assumiamo che, al momento della fabbricazione di ogni batch di orologi, il loro 
 	- Post su db
 	- Get da data store
 	- Acquisizione dati
+	Le API riceveranno i dati dal simulatore ogni 10 secondi su una richiesta POST e ne scriveranno i contenuti su db.
+	Le API manderanno i dati al front-end tramite richieste get per estrarre dal db i dati di una sezione a scelta, oppure di un orologio.
+	Le API manderanno i dati relativi al malfunzionamento dei dispositivi 
 	
 #### Data Store
 	- Memorizzazione
