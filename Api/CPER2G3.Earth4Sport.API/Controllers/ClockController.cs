@@ -28,7 +28,7 @@ namespace CPER2G3.Earth4Sport.API.Controllers
 
             var client = new MongoClient(connstr);
 
-            var collection = client.GetDatabase("test").GetCollection<BsonDocument>("devices");
+            var collection = client.GetDatabase("provisioning").GetCollection<BsonDocument>("devices");
 
             var filter = Builders<BsonDocument>.Filter.Eq("_id", uuid);
             try

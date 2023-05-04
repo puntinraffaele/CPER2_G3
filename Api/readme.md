@@ -26,5 +26,5 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://cper2g3:8z5!H7jAcA!C@mongo:27017/
 ```
 
-Dopodiché dall'interfaccia di [mongo-express](http://localhost:8081/) va creato un db di nome `test` e dentro a questo db una collection di nome `devices`.  
+Dopodiché dall'interfaccia di [mongo-express](http://localhost:8081/) va creato un db di nome `provisioning` e dentro a questo db una collection di nome `devices`.  
 In `devices` -> `new document` -> incolli il file JSON generato con `Provisioning/clockMaker.js` 
