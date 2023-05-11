@@ -11,23 +11,30 @@ using System.Text.Json;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using CPER2G3.Earth4Sport.API.Models;
+using System.Net;
+using AzureFunctions.Extensions.Swashbuckle.Attribute;
 
-namespace CPER2G3.Earth4Sport.AzureFunction
+namespace CPER2G3.Earth4Sport.AzureFunction.Functions
 {
-    public static class Function1
+    public static class Clock
     {
-        [FunctionName("clock")]
+        [FunctionName("get_device_data")]
+        [ProducesResponseType(typeof(ClockData), (int)HttpStatusCode.OK)]
+        [QueryStringParameter("uuid", "", DataType = typeof(string))]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get")]
+            HttpRequest req,
+            ILogger log
+            )
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             string uuid = req.Query["uuid"];
 
-            // la password è generata con un generatore online fyi, i dati sono provvisori a fini di test
+            // la password ï¿½ generata con un generatore online fyi, i dati sono provvisori a fini di test
             string connstr = "mongodb://cper2g3:8z5!H7jAcA!C@localhost:27017";
-            if (connstr == null) {
+            if (connstr == null)
+            {
                 Console.WriteLine("Connection string not set");
                 Environment.Exit(0);
             }
@@ -37,15 +44,18 @@ namespace CPER2G3.Earth4Sport.AzureFunction
             var collection = client.GetDatabase("provisioning").GetCollection<BsonDocument>("devices");
 
             var filter = Builders<BsonDocument>.Filter.Eq("_id", uuid);
-            try {
+            try
+            {
                 var document = collection.Find(filter).First();
-                return new OkObjectResult(new ClockData() {
+                return new OkObjectResult(new ClockData()
+                {
                     uuid = document["_id"].AsString,
                     n_batch = document["n_batch"].AsInt32,
                     data_batch = DateTime.Parse(document["data_batch"].AsString)
                 });
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 return new NotFoundObjectResult("The id does not exist.");
             }
         }

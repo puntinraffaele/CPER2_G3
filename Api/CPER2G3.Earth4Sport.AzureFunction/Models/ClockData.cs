@@ -1,4 +1,6 @@
-﻿namespace CPER2G3.Earth4Sport.API.Models
+﻿using System;
+
+namespace CPER2G3.Earth4Sport.API.Models
 {
     public class ClockData
     {

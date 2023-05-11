@@ -9,16 +9,14 @@ namespace CPER2G3.Earth4Sport.API.Controllers
     [Route("/clock")]
     public class ClockController : ControllerBase
     {
-
         private readonly ILogger<ClockController> _logger;
-
         public ClockController(ILogger<ClockController> logger) { _logger = logger; }
 
         [HttpGet("{uuid}")]
         public IActionResult GetDevice(string uuid) => GetDeviceData(uuid);
         private IActionResult GetDeviceData(string uuid)
         {
-            // la password è generata con un generatore online fyi, i dati sono provvisori a fini di test
+            // la password ï¿½ generata con un generatore online fyi, i dati sono provvisori a fini di test
             string connstr = "mongodb://cper2g3:8z5!H7jAcA!C@localhost:27017";
             if (connstr == null)
             {
@@ -27,10 +25,10 @@ namespace CPER2G3.Earth4Sport.API.Controllers
             }
 
             var client = new MongoClient(connstr);
-
-            var collection = client.GetDatabase("provisioning").GetCollection<BsonDocument>("devices");
-
+            var db = client.GetDatabase("provisioning");
+            var collection = db.GetCollection<BsonDocument>("devices");
             var filter = Builders<BsonDocument>.Filter.Eq("_id", uuid);
+
             try
             {
                 var document = collection.Find(filter).First();
