@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "CPER2G3.Earth4Sport.AzureFunction": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7095",
+      "launchBrowser": false
+    }
+  }
+}
