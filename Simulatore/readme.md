@@ -4,13 +4,8 @@ File `.env`:
 ```
 # intervallo di aggiornamento, in secondi:
 INTERVAL=10
+# UUID di un orologio:
+CLOCK_ID="2e3864f3-8fe3-4264-86f2-b35d7b57fd24"
+# lunghezza di una vasca in metri:
+POOL_LENGTH=200
 ```
-
-Meccanismo di provisioning:
- - tabella di anagrafica in cui sono salvati tutti gli UUID + SKU
- - script per generare il tutto:  
-   - Genera un timestamp e 20(?) UUID, li salva nel db
-   - aumenta il ts di tot, genera altri UUID
-   - ... ecc
-
-Sarebbe anche simp che il simulatore invii i dati su un canale [MQTT](https://mqtt.org/getting-started/)

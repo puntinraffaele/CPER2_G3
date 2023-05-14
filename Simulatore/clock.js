@@ -1,84 +1,125 @@
-// Prima bozza molto brutta di un simulatore di smartwatch
-const clockID = require('uuid').v4()
-console.log('Activities for clock:', clockID)
+// Questo deve sempre stare in cima per caricare le variabili d'ambiente all'avvio:
 require('dotenv').config()
 
-const sessionUUID = require('uuid').v4();
-let pools = 0;
-let bpm = 0;
-let position = {
-    latitude: (Math.random() * 180) - 90,
-    longitude: (Math.random() * 360) - 180
+// funzioni:
+const uuid = require('uuid').v4;
+function randomNumberBetween(min, max) {
+    return Math.floor(Math.random() * (max - min) + min)
 };
-
-function generateStartingBpm(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
-};
-
-function getBpm() {
-    let startingBpm = generateStartingBpm(80, 120);
-    let chance = Math.random();
-    if (chance < 0.5) startingBpm + 10;
-    else startingBpm - 10;
-    bpm = startingBpm;
-};
-
-const sim = () => {
-    let random = Math.random();
-    if (random < 0.15) {
-        position.latitude += Math.random();
-        position.longitude += Math.random();
-    }
-    else if (random >= 0.15 && random < 0.3) {
-        position.latitude += Math.random();
-        position.longitude -= Math.random();
-    }
-    else if (random >= 0.3 && random < 0.45) {
-        position.latitude -= Math.random();
-        position.longitude += Math.random();
-    }
-    else if (random >= 0.45 && random < 0.6) {
-        position.latitude -= Math.random()
-    }
-    else if (random >= 0.6 && random < 0.75) {
-        position.latitude += Math.random()
-    }
-    else if (random >= 0.75 && random < 0.9) {
-        position.longitude -= Math.random()
-    }
-    else if (random >= 0.9) {
-        position.longitude += Math.random()
-    }
-    if(position.latitude >= 90 ){
-        let delta = 90 - position.latitude
-        position.latitude = 90 + delta
-        position.longitude -= 180
-    }
-    else if(position.latitude < -90){
-        let delta = -90 - position.latitude
-        position.latitude = -90 + delta
-        position.longitude -= 180
-    }
-    if(position.longitude > 180){
-        position.longitude = ((position.longitude + 180) % 360) - 180
-    }
-    else if(position.longitude <= -180){
-        position.longitude = ((position.longitude - 180) % 360) + 180
-    }
-
-    getBpm()
-
-    let res = {
-        sessionUUID,
-        activityUUID: require('uuid').v4(),
-        pools,
-        bpm,
-        position,
-        timestamp: new Date()
-    }
-    console.log(res)
+function movement() {
+    return Math.random() / 10000 // 0.0001 dovrebbe essere ~100m all'equatore
 }
-sim()
-setInterval(sim, process.env.INTERVAL * 1000)
+function calcDistance(lat1, lon1, lat2, lon2) {
+    // tutta sta roba è copiaincollata da qui:
+    // https://www.movable-type.co.uk/scripts/latlong.html
+    const R = 6371e3; // metres
+    const r1 = lat1 * Math.PI / 180; // φ, λ in radians
+    const r2 = lat2 * Math.PI / 180;
+    const dr = (lat2 - lat1) * Math.PI / 180;
+    const dl = (lon2 - lon1) * Math.PI / 180;
+
+    const a = Math.sin(dr / 2) * Math.sin(dr / 2) +
+        Math.cos(r1) * Math.cos(r2) *
+        Math.sin(dl / 2) * Math.sin(dl / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c; // in metres
+}
+
+// costanti:
+const clockID = process.env.CLOCK_ID ?? 'placeholder-id (shoulde set in .env)';
+const poolLength = process.env.POOL_LENGTH ?? 200;
+const interval = process.env.INTERVAL ?? 10;
+const sessionUUID = uuid();
+
+// classe per il risultato:
+class Data {
+    constructor() {
+        this.sessionUUID = sessionUUID;
+        this.pools = 0;
+        this.distance = 0;
+        this.bpm = randomNumberBetween(80, 120);
+        this.gps = {
+            latitude: (Math.random() * 180) - 90,
+            longitude: (Math.random() * 360) - 180
+        };
+        this.timestamp = new Date();
+        this.time_active = 0;
+    }
+
+    update() {
+        // aggiorno i BPM:
+        this.bpm = randomNumberBetween(80, 120);
+
+        // salvo temporaneamente la posizione attuale per poter calcolare la distanza da quella nuova:
+        let prevLat = this.gps.latitude;
+        let prevLon = this.gps.longitude;
+
+        // aggiorno la posizione:
+        let rand4gps = Math.random(); // direzione casuale
+        let newLat = prevLat;
+        let newLon = prevLon;
+        if (rand4gps < 0.15) {
+            newLat += movement();
+            newLon += movement();
+        }
+        else if (rand4gps >= 0.15 && rand4gps < 0.3) {
+            newLat += movement();
+            newLon -= movement();
+        }
+        else if (rand4gps >= 0.3 && rand4gps < 0.45) {
+            newLat -= movement();
+            newLon += movement();
+        }
+        else if (rand4gps >= 0.45 && rand4gps < 0.6) {
+            newLat = prevLat - movement();
+        }
+        else if (rand4gps >= 0.6 && rand4gps < 0.75) {
+            newLat = prevLat + movement();
+        }
+        else if (rand4gps >= 0.75 && rand4gps < 0.9) {
+            newLon = prevLon - movement();
+        }
+        else if (rand4gps >= 0.9) {
+            newLon = prevLon + movement();
+        }
+        if (newLat >= 90) {
+            newLat = 90 + (90 - newLat);
+            newLon -= 180;
+        }
+        else if (newLat < -90) {
+            newLat = -90 + (-90 - newLat);
+            newLon -= 180;
+        }
+        if (newLon > 180) {
+            newLon = ((newLon + 180) % 360) - 180;
+        }
+        else if (newLon <= -180) {
+            newLon = ((newLon - 180) % 360) + 180;
+        };
+        this.gps.latitude = newLat;
+        this.gps.longitude = newLon;
+
+        // ora che ho la nuova posizione calcolo distanza percorsa e vasche:
+        this.distance += calcDistance(prevLat, prevLon, newLat, newLon)
+        this.pools = Math.floor(this.distance / poolLength)
+
+        // tengo traccia del tempo percorso, giusto per avere un'idea della velocità a cui sta nuotando sta cosa:
+        let tmp_timestamp = new Date()
+        this.time_active += (tmp_timestamp.valueOf() - this.timestamp.valueOf()) / 1000;
+
+        // aggiorno il timestamp:
+        this.timestamp = tmp_timestamp;
+    };
+};
+
+// MAIN
+console.log('Activities for clock:', clockID)
+const swim = function () {
+    let data = new Data();
+    console.log(data)
+    setInterval(() => {
+        data.update()
+        console.log(data)
+    }, interval * 1000)
+}()
