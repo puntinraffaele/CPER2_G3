@@ -2,9 +2,6 @@ import styles from '../styles/styles.css';
 import Link from 'next/link';
 
 export default function App({ Component, pageProps }) {
-    let lat = 45.92997
-    let lon = 12.63661
-    let zoom = 15
     return (
         <>
         <header>
@@ -92,7 +89,7 @@ export default function App({ Component, pageProps }) {
         </nav>
 
         </header>
-            <Component {...pageProps} lat={lat} lon={lon} zoom={zoom}/>
+            <Component {...pageProps} />
         </>
     );
 }
