@@ -116,13 +116,35 @@ class Data {
     };
 };
 
+
+async function postJSON(data) {
+    try {
+      const response = await fetch("http://127.0.0.1:7095/api/post_device_data", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      const result = await response.json();
+      console.log("Success:", result);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+  
+
+  
+
 // MAIN
 console.log('Activities for clock:', clockID)
-const swim = function () {
+const swim = async function () {
     let data = new Data();
     console.log(data)
-    setInterval(() => {
+    setInterval( async function() {
         data.update()
+        postJSON(data);
         console.log(data)
     }, interval * 1000)
 }()

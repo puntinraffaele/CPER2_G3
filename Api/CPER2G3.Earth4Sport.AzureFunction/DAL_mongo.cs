@@ -1,4 +1,5 @@
 ﻿using CPER2G3.Earth4Sport.API.Models;
+using CPER2G3.Earth4Sport.AzureFunction.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
@@ -13,15 +14,19 @@ using System.Threading.Tasks;
 namespace CPER2G3.Earth4Sport.AzureFunction {
     public class DAL_mongo : IDAL {
         private readonly string _connectionString;
-        public MongoClient client;
+        private MongoClient client;
+        private IMongoDatabase dbProvisioning;
+        private IMongoDatabase dbSessions;
 
         public DAL_mongo(IConfiguration conf) {
             _connectionString = conf.GetConnectionString("mongo");
             client = new MongoClient(_connectionString);
+            dbProvisioning = client.GetDatabase("provisioning");
+            dbSessions = client.GetDatabase("sessions");
         }
 
         public async Task<ObjectResult> getClockById(string uuid) {
-            var collection = client.GetDatabase("provisioning").GetCollection<BsonDocument>("devices");
+            var collection = dbProvisioning.GetCollection<BsonDocument>("devices");
 
             var filter = Builders<BsonDocument>.Filter.Eq("_id", uuid);
             try {
@@ -35,6 +40,22 @@ namespace CPER2G3.Earth4Sport.AzureFunction {
             catch (Exception) {
                 return new NotFoundObjectResult("The id does not exist.");
             }
+        }
+
+        public async Task<ObjectResult> postClock(ClockActivityData activity) {
+            var collection = dbSessions.GetCollection<ClockActivityData>(activity.SessionUUID);
+            if (collection == null) {
+                dbProvisioning.CreateCollection(activity.SessionUUID);
+                collection = dbSessions.GetCollection<ClockActivityData>(activity.SessionUUID);
+            }
+            try {
+                await collection.InsertOneAsync(activity);
+                return new OkObjectResult("Inserimento avvenuto");
+            }
+            catch (Exception) {
+                return new BadRequestObjectResult("Error");
+            }
+
         }
     }
 }
