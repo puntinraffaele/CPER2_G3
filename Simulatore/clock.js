@@ -3,12 +3,15 @@ require('dotenv').config()
 
 // funzioni:
 const uuid = require('uuid').v4;
+
 function randomNumberBetween(min, max) {
     return Math.floor(Math.random() * (max - min) + min)
 };
+
 function movement() {
     return Math.random() / 10000 // 0.0001 dovrebbe essere ~100m all'equatore
 }
+
 function calcDistance(lat1, lon1, lat2, lon2) {
     // tutta sta roba è copiaincollata da qui:
     // https://www.movable-type.co.uk/scripts/latlong.html
@@ -27,7 +30,7 @@ function calcDistance(lat1, lon1, lat2, lon2) {
 }
 
 // costanti:
-const clockID = process.env.CLOCK_ID ?? 'placeholder-id (shoulde set in .env)';
+const clockID = process.env.CLOCK_ID ?? 'placeholder-id (should be set in .env)';
 const poolLength = process.env.POOL_LENGTH ?? 200;
 const interval = process.env.INTERVAL ?? 10;
 const sessionUUID = uuid();

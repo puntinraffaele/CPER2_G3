@@ -12,24 +12,20 @@ using AzureFunctions.Extensions.Swashbuckle;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 
-namespace CPER2G3.Earth4Sport.AzureFunction
-{
-    public static class Swag
-    {
+namespace CPER2G3.Earth4Sport.AzureFunction {
+    public static class Swag {
         [SwaggerIgnore]
         [FunctionName("Swagger")]
         public static Task<HttpResponseMessage> Swagger(
                 [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "swagger/json")] HttpRequestMessage req,
-                [SwashBuckleClient] ISwashBuckleClient swasBuckleClient)
-        {
+                [SwashBuckleClient] ISwashBuckleClient swasBuckleClient) {
             return Task.FromResult(swasBuckleClient.CreateSwaggerJsonDocumentResponse(req));
         }
         [SwaggerIgnore]
         [FunctionName("SwaggerUI")]
         public static Task<HttpResponseMessage> SwaggerUI(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "swagger/ui")] HttpRequestMessage req,
-        [SwashBuckleClient] ISwashBuckleClient swasBuckleClient)
-        {
+        [SwashBuckleClient] ISwashBuckleClient swasBuckleClient) {
             return Task.FromResult(swasBuckleClient.CreateSwaggerUIResponse(req, "swagger/json"));
         }
     }

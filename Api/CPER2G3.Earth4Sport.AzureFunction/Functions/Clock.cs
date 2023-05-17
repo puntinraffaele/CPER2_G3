@@ -16,12 +16,19 @@ using AzureFunctions.Extensions.Swashbuckle.Attribute;
 
 namespace CPER2G3.Earth4Sport.AzureFunction.Functions
 {
-    public static class Clock
+    public class Clock
     {
+
+        private IDAL _dal { get; set; }
+
+        public Clock(IDAL dal) {
+            _dal = dal;
+        }
+
         [FunctionName("get_device_data")]
         [ProducesResponseType(typeof(ClockData), (int)HttpStatusCode.OK)]
         [QueryStringParameter("uuid", "", DataType = typeof(string))]
-        public static async Task<IActionResult> Run(
+        public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get")]
             HttpRequest req,
             ILogger log
@@ -31,33 +38,19 @@ namespace CPER2G3.Earth4Sport.AzureFunction.Functions
 
             string uuid = req.Query["uuid"];
 
-            // la password � generata con un generatore online fyi, i dati sono provvisori a fini di test
-            string connstr = "mongodb://cper2g3:8z5!H7jAcA!C@localhost:27017";
-            if (connstr == null)
-            {
-                Console.WriteLine("Connection string not set");
-                Environment.Exit(0);
-            }
+            return await _dal.getClockById(uuid);
+           
+            //// la password � generata con un generatore online fyi, i dati sono provvisori a fini di test
+            //string connstr = "mongodb://cper2g3:8z5!H7jAcA!C@localhost:27017";
+            //if (connstr == null)
+            //{
+            //    Console.WriteLine("Connection string not set");
+            //    Environment.Exit(0);
+            //}
 
-            var client = new MongoClient(connstr);
+            //var client = new MongoClient(connstr);
 
-            var collection = client.GetDatabase("provisioning").GetCollection<BsonDocument>("devices");
-
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", uuid);
-            try
-            {
-                var document = collection.Find(filter).First();
-                return new OkObjectResult(new ClockData()
-                {
-                    uuid = document["_id"].AsString,
-                    n_batch = document["n_batch"].AsInt32,
-                    data_batch = DateTime.Parse(document["data_batch"].AsString)
-                });
-            }
-            catch (Exception)
-            {
-                return new NotFoundObjectResult("The id does not exist.");
-            }
+            
         }
     }
 }
