@@ -10,15 +10,11 @@ using System;
 using System.Reflection;
 
 [assembly: WebJobsStartup(typeof(CPER2G3.Earth4Sport.SwashbuckleStartup))]
-namespace CPER2G3.Earth4Sport
-{
-    public class SwashbuckleStartup : FunctionsStartup
-    {
-        public override void Configure(IFunctionsHostBuilder builder)
-        {
+namespace CPER2G3.Earth4Sport {
+    public class SwashbuckleStartup : FunctionsStartup {
+        public override void Configure(IFunctionsHostBuilder builder) {
             builder.Services.AddSingleton<IDAL, DAL_mongo>();
-            builder.AddSwashBuckle(Assembly.GetExecutingAssembly(), opts =>
-            {
+            builder.AddSwashBuckle(Assembly.GetExecutingAssembly(), opts => {
                 opts.AddCodeParameter = true;
                 opts.PrependOperationWithRoutePrefix = true;
                 opts.Documents = new[] {
@@ -29,10 +25,8 @@ namespace CPER2G3.Earth4Sport
                         Version = "v2"
                     }
                 };
-                opts.ConfigureSwaggerGen = x =>
-                {
-                    x.CustomOperationIds(apiDesc =>
-                    {
+                opts.ConfigureSwaggerGen = x => {
+                    x.CustomOperationIds(apiDesc => {
                         return apiDesc.TryGetMethodInfo(out MethodInfo mInfo) ? mInfo.Name : default(Guid).ToString();
                     });
                 };

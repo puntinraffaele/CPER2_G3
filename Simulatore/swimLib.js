@@ -1,38 +1,9 @@
-// Questo deve sempre stare in cima per caricare le variabili d'ambiente all'avvio:
-require('dotenv').config()
-
-// funzioni:
 const uuid = require('uuid').v4;
-function randomNumberBetween(min, max) {
-    return Math.floor(Math.random() * (max - min) + min)
-};
-function movement() {
-    return Math.random() / 10000 // 0.0001 dovrebbe essere ~100m all'equatore
-}
-function calcDistance(lat1, lon1, lat2, lon2) {
-    // tutta sta roba è copiaincollata da qui:
-    // https://www.movable-type.co.uk/scripts/latlong.html
-    const R = 6371e3; // metres
-    const r1 = lat1 * Math.PI / 180; // φ, λ in radians
-    const r2 = lat2 * Math.PI / 180;
-    const dr = (lat2 - lat1) * Math.PI / 180;
-    const dl = (lon2 - lon1) * Math.PI / 180;
 
-    const a = Math.sin(dr / 2) * Math.sin(dr / 2) +
-        Math.cos(r1) * Math.cos(r2) *
-        Math.sin(dl / 2) * Math.sin(dl / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-    return R * c; // in metres
-}
-
-// costanti:
-const clockID = process.env.CLOCK_ID ?? 'placeholder-id (shoulde set in .env)';
 const poolLength = process.env.POOL_LENGTH ?? 200;
 const interval = process.env.INTERVAL ?? 10;
 const sessionUUID = uuid();
 
-// classe per il risultato:
 class Data {
     constructor() {
         this.sessionUUID = sessionUUID;
@@ -113,8 +84,6 @@ class Data {
     };
 };
 
-// MAIN
-console.log('Activities for clock:', clockID)
 const swim = function () {
     let data = new Data();
     console.log(data)
@@ -122,4 +91,34 @@ const swim = function () {
         data.update()
         console.log(data)
     }, interval * 1000)
-}()
+}
+
+function randomNumberBetween(min, max) {
+    return Math.floor(Math.random() * (max - min) + min)
+};
+
+function movement() {
+    return Math.random() / 10000 // 0.0001 dovrebbe essere ~100m all'equatore
+}
+
+function calcDistance(lat1, lon1, lat2, lon2) {
+    // tutta sta roba è copiaincollata da qui:
+    // https://www.movable-type.co.uk/scripts/latlong.html
+    const R = 6371e3; // metres
+    const r1 = lat1 * Math.PI / 180; // φ, λ in radians
+    const r2 = lat2 * Math.PI / 180;
+    const dr = (lat2 - lat1) * Math.PI / 180;
+    const dl = (lon2 - lon1) * Math.PI / 180;
+
+    const a = Math.sin(dr / 2) * Math.sin(dr / 2) +
+        Math.cos(r1) * Math.cos(r2) *
+        Math.sin(dl / 2) * Math.sin(dl / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c; // in metres
+}
+
+module.exports = {
+    Data,
+    swim
+}
