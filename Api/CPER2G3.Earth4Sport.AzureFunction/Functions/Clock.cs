@@ -13,6 +13,7 @@ using MongoDB.Bson;
 using CPER2G3.Earth4Sport.API.Models;
 using System.Net;
 using AzureFunctions.Extensions.Swashbuckle.Attribute;
+using CPER2G3.Earth4Sport.AzureFunction.Models;
 
 namespace CPER2G3.Earth4Sport.AzureFunction.Functions
 {
@@ -32,8 +33,7 @@ namespace CPER2G3.Earth4Sport.AzureFunction.Functions
             [HttpTrigger(AuthorizationLevel.Anonymous, "get")]
             HttpRequest req,
             ILogger log
-            )
-        {
+            ){
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             string uuid = req.Query["uuid"];
@@ -51,6 +51,38 @@ namespace CPER2G3.Earth4Sport.AzureFunction.Functions
             //var client = new MongoClient(connstr);
 
             
+        }
+
+        [FunctionName("post_device_data")]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Pippo(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post")]
+            HttpRequest req,
+            ILogger log
+            ) {
+
+
+            string requestBody = String.Empty;
+            using (StreamReader streamReader = new StreamReader(req.Body)) {
+                requestBody = await streamReader.ReadToEndAsync();
+            }
+            dynamic data = JsonConvert.DeserializeObject(requestBody);
+
+            Console.WriteLine(data.timestamp);
+            ClockActivityData clockData = new ClockActivityData() {
+                SessionUUID = data.sessionUUID,
+                Bpm = data.bpm,
+                Distance = data.distance,
+                Pools = data.pools,
+                Gps = new Gps() {
+                    latitude = data.gps.latitude,
+                    longitude = data.gps.longitude,
+                },
+                TimeStamp = data.timestamp
+            };
+
+
+            return await _dal.postClock(clockData);
         }
     }
 }
