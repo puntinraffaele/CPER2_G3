@@ -26,24 +26,36 @@ export default function Sessions({uuid}) {
   if (!data) return <p>No data</p>;
 
   let table = (
-    <table>
-      <tr>
-        <th>Inizio</th>
-        <th>Fine</th>
-        <th>Distanza</th>
-        <th>Vasche</th>
-        <th>Bpm</th>
-      </tr>
-      {
-        data.map(el => <tr>
-          <td>{el.start}</td>
-          <td>{el.end}</td>
-          <td>{el.totalDistance}</td>
-          <td>{el.totalPools}</td>
-          <td>{el.avgBpm}</td>
-        </tr>)
-      }
-    </table>
+    <div class="flex flex-col">
+      <div class="-m-1.5 overflow-x-auto">
+        <div class="p-1.5 min-w-full inline-block align-middle">
+          <div class="overflow-hidden">
+            <table class="w-full text-left text-gray-500 dark:text-gray-400">
+              <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" class="px-6 py-3">Inizio</th>
+                  <th scope="col" class="px-6 py-3">Fine</th>
+                  <th scope="col" class="px-6 py-3">Distanza</th>
+                  <th scope="col" class="px-6 py-3">Vasche</th>
+                  <th scope="col" class="px-6 py-3">Bpm</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                {
+                  data.map(el => <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    <td>{el.start}</td>
+                    <td>{el.end}</td>
+                    <td>{el.totalDistance}</td>
+                    <td>{el.totalPools}</td>
+                    <td>{el.avgBpm}</td>
+                  </tr>)
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 
   return table

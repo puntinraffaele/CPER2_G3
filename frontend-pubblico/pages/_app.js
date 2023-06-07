@@ -49,9 +49,12 @@ export default function App({ Component, pageProps }) {
                 data-te-navbar-nav-ref>
                 <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                     <h1 className="title">
-                        <Link href="/">
-                        {/* <Image src={logo} width={150} alt={"logo"}/> */}
-                        Earth4Sport</Link>
+                        <Link href="/" className='flex'>
+                            <Image src={logo} width={25} alt={"logo"}/>
+                            <div className='mx-2 text-lg font-semibold font-mono'>
+                                Earth4Sport
+                            </div>
+                        </Link>
                     </h1>
                 </li>
                 {/* <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
