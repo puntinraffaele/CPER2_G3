@@ -8,18 +8,15 @@ export default function App({ Component, pageProps }) {
         <>
         <header>
         <nav
-            className="flex w-full items-center justify-start bg-white py-2 text-neutral-600 shadow-lg font-mono font-semibold" data-te-navbar-ref>
+            className="flex w-full items-center justify-start bg-white py-2 text-gray-600 shadow-lg font-mono font-semibold" data-te-navbar-ref>
             <div className="flex w-full justify-between items-center ml-4" id="navbarSupportedContentY">
-                {/* data-te-collapse-item> */}
-                <a href="/" className="flex items-center justify-start" >
-                    <Image src={logo} width={25} alt={"logo"}/>
-                    <span className="ml-2 text-lg">Earth4Sport</span>
+                <a href="/" className="flex items-center text-xl justify-start" >
+                    <Image src={logo} width={30} alt={"logo"}/>
+                    <span className="ml-2 text-[#3f48cc] drop-shadow-lg">EARTH</span>
+                    <span className="text-green-600">4</span>
+                    <span className="text-[#3f48cc]">SPORT</span>
                 </a>
-
-                <button className="mr-4 rounded-lg border-2 border-transparent text-gray-400 bg-gray-900 hover:text-gray-900 hover:bg-gray-400 hover:border-gray-900
-                hover:border-2">
-                    <span className="p-3">Logout</span>
-                </button>
+                <a href="/" className="mr-4 text-lg">Logout</a>
             </div>
         </nav>
 

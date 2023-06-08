@@ -34,29 +34,29 @@ export default function Sessions({uuid}) {
   if (!data) return <p>No data</p>;
 
   let table = (
-    <div className="flex flex-col">
-      <div className="-m-1.5 overflow-x-auto">
+    <div className="flex flex-col mt-16 mx-48">
+      <div className="overflow-x-auto">
         <div className="p-1.5 min-w-full inline-block align-middle">
           <div className="overflow-hidden">
-            <table className="w-full text-left text-gray-500 dark:text-gray-400">
-              <thead className="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table className="w-full text-left text-gray-400">
+              <thead className="uppercase bg-gray-700 text-gray-400">
                 <tr>
-                  <th scope="col" className="px-6 py-3">Inizio</th>
+                  <th scope="col" className="px-6 py-3 ">Inizio</th>
                   <th scope="col" className="px-6 py-3">Fine</th>
                   <th scope="col" className="px-6 py-3">Distanza</th>
                   <th scope="col" className="px-6 py-3">Vasche</th>
                   <th scope="col" className="px-6 py-3">Bpm</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+              <tbody className="divide-y divide-gray-700">
                 {
-                  data.map((el, rowIndex) => <><tr key={rowIndex} className="cursor-pointer bg-white border-b dark:bg-gray-900 dark:border-gray-700" 
+                  data.map((el, rowIndex) => <><tr key={rowIndex} className="cursor-pointer divide-x divide-gray-700 bg-gray-900" 
                   onClick={() => ViewSessionDetails(el.id)}>
-                    <td key="{el.start}">{el.start}</td>
-                    <td key="{el.end}">{el.end}</td>
-                    <td key="{el.totalDistance}">{el.totalDistance}</td>
-                    <td key="{el.totalPools}">{el.totalPools}</td>
-                    <td key="{el.avgBpm}">{el.avgBpm}</td>
+                    <td key="{el.start}" className="px-6 py-3">{el.start}</td>
+                    <td key="{el.end}" className="px-6 py-3">{el.end}</td>
+                    <td key="{el.totalDistance}" className="px-6 py-3">{el.totalDistance}</td>
+                    <td key="{el.totalPools}" className="px-6 py-3">{el.totalPools}</td>
+                    <td key="{el.avgBpm}" className="px-6 py-3">{el.avgBpm}</td>
                   </tr>
                   </>
                   )
