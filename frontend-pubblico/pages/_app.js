@@ -47,39 +47,17 @@ export default function App({ Component, pageProps }) {
                 <ul
                 className="mr-auto flex flex-col lg:flex-row"
                 data-te-navbar-nav-ref>
-                <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                    <h1 className="title">
-                        <Link href="/" className='flex'>
-                            <Image src={logo} width={25} alt={"logo"}/>
-                            <div className='mx-2 text-lg font-semibold font-mono'>
-                                Earth4Sport
-                            </div>
-                        </Link>
-                    </h1>
-                </li>
-                {/* <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                    <a
-                    className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 
-                    dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    href="#!"
-                    data-te-nav-link-ref
-                    data-te-ripple-init
-                    data-te-ripple-color="light"
-                    >Features</a
-                    >
-                </li>
-                <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                    <a
-                    className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 
-                    dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    href="#!"
-                    data-te-nav-link-ref
-                    data-te-ripple-init
-                    data-te-ripple-color="light"
-                    >Pricing</a
-                    >
-                </li>
-                <li className="mb-2 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                    <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                        <h1 className="title">
+                            <Link href="/" className='flex'>
+                                <Image src={logo} width={25} alt={"logo"}/>
+                                <div className='mx-2 text-lg font-semibold font-mono'>
+                                    Earth4Sport
+                                </div>
+                            </Link>
+                        </h1>
+                    </li>
+                {/* <li className="mb-2 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                     <a
                     className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 
                     dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"

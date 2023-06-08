@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-const baseURL = 'https://cper2g3earth4sportazurefunction.azurewebsites.net/api/get_device_data?uuid=69d66243-e51c-474d-a41b-fd4ed1a91a42'
+import { baseURL } from '../utils/urls';
+
+const url = baseURL + 'get_device_data?uuid=69d66243-e51c-474d-a41b-fd4ed1a91a42'
 
 export default function SingleSession() {
   const [data, setData] = useState(null);
@@ -7,7 +9,7 @@ export default function SingleSession() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(baseURL)
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         data.data_batch = new Date(data.data_batch).toLocaleString('it')

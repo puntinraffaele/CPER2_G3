@@ -1,0 +1,1 @@
+export const baseURL = 'https://cper2g3earth4sportazurefunction.azurewebsites.net/api/'

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-const baseURL = 'https://cper2g3earth4sportazurefunction.azurewebsites.net/api/get_sessions_list/'
+import { baseURL } from '../utils/urls';
+
+const url = baseURL + 'get_sessions_list/'
 
 export default function Sessions({uuid}) {
   const [data, setData] = useState(null);
@@ -7,7 +9,7 @@ export default function Sessions({uuid}) {
 
   useEffect(() => {
     setLoading(true);
-    fetch(baseURL + uuid)
+    fetch(url + uuid)
       .then((res) => res.json())
       .then((data) => {
         data = data.map(el => {
@@ -26,28 +28,28 @@ export default function Sessions({uuid}) {
   if (!data) return <p>No data</p>;
 
   let table = (
-    <div class="flex flex-col">
-      <div class="-m-1.5 overflow-x-auto">
-        <div class="p-1.5 min-w-full inline-block align-middle">
-          <div class="overflow-hidden">
-            <table class="w-full text-left text-gray-500 dark:text-gray-400">
-              <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div className="flex flex-col">
+      <div className="-m-1.5 overflow-x-auto">
+        <div className="p-1.5 min-w-full inline-block align-middle">
+          <div className="overflow-hidden">
+            <table className="w-full text-left text-gray-500 dark:text-gray-400">
+              <thead className="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                  <th scope="col" class="px-6 py-3">Inizio</th>
-                  <th scope="col" class="px-6 py-3">Fine</th>
-                  <th scope="col" class="px-6 py-3">Distanza</th>
-                  <th scope="col" class="px-6 py-3">Vasche</th>
-                  <th scope="col" class="px-6 py-3">Bpm</th>
+                  <th scope="col" className="px-6 py-3">Inizio</th>
+                  <th scope="col" className="px-6 py-3">Fine</th>
+                  <th scope="col" className="px-6 py-3">Distanza</th>
+                  <th scope="col" className="px-6 py-3">Vasche</th>
+                  <th scope="col" className="px-6 py-3">Bpm</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                 {
-                  data.map(el => <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                    <td>{el.start}</td>
-                    <td>{el.end}</td>
-                    <td>{el.totalDistance}</td>
-                    <td>{el.totalPools}</td>
-                    <td>{el.avgBpm}</td>
+                  data.map(el => <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    <td key="{el.start}">{el.start}</td>
+                    <td key="{el.end}">{el.end}</td>
+                    <td key="{el.totalDistance}">{el.totalDistance}</td>
+                    <td key="{el.totalPools}">{el.totalPools}</td>
+                    <td key="{el.avgBpm}">{el.avgBpm}</td>
                   </tr>)
                 }
               </tbody>
