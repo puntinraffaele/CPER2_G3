@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react';
 import { baseURL } from '../utils/urls';
+import SingleSession from './singleSession';
 
 const url = baseURL + 'get_sessions_list/'
 
 export default function Sessions({uuid}) {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const [selectedSession, setSelectedSession] = useState(null);
+
+  const ViewSessionDetails = (sessionId) => {
+    setSelectedSession(sessionId)
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -44,16 +50,20 @@ export default function Sessions({uuid}) {
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                 {
-                  data.map(el => <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                  data.map((el, rowIndex) => <><tr key={rowIndex} className="cursor-pointer bg-white border-b dark:bg-gray-900 dark:border-gray-700" 
+                  onClick={() => ViewSessionDetails(el.id)}>
                     <td key="{el.start}">{el.start}</td>
                     <td key="{el.end}">{el.end}</td>
                     <td key="{el.totalDistance}">{el.totalDistance}</td>
                     <td key="{el.totalPools}">{el.totalPools}</td>
                     <td key="{el.avgBpm}">{el.avgBpm}</td>
-                  </tr>)
+                  </tr>
+                  </>
+                  )
                 }
               </tbody>
             </table>
+            <SingleSession selectedSession={selectedSession} />
           </div>
         </div>
       </div>
@@ -62,3 +72,4 @@ export default function Sessions({uuid}) {
 
   return table
 }
+
