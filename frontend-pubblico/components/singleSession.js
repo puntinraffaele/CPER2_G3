@@ -3,7 +3,7 @@ import { baseURL } from '../utils/urls';
 
 const url = baseURL + 'get_device_data?uuid=69d66243-e51c-474d-a41b-fd4ed1a91a42'
 
-export default function SingleSession() {
+export default function SingleSession({selectedSession}) {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
@@ -21,11 +21,14 @@ export default function SingleSession() {
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No data</p>;
 
+  if (!selectedSession) return <></>;
+
   return (
     <div>
-      <h1>{data.uuid}</h1>
+      {selectedSession}
+      {/* <h1>{data.uuid}</h1>
       <p>{data.n_batch}</p>
-      <p>{data.data_batch}</p>
+      <p>{data.data_batch}</p> */}
     </div>
   );
 }
