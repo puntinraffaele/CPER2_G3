@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { baseURL } from '../utils/urls';
-import { viewSessionDetails } from './sessionSummary';
 
 const url = baseURL + 'get_session_data/'
 
@@ -30,12 +29,22 @@ export default function SessionDetails({sessionId, detailsAreShown}) {
 
   let prova = (
     <>
+      <div>
+        <th scope="col" className="px-6 py-3">Vasche</th>
+        <th scope="col" className="px-6 py-3">Distanza</th>
+        <th scope="col" className="px-6 py-3">Bpm</th>
+        <th scope="col" className="px-6 py-3">Latitudine</th>
+        <th scope="col" className="px-6 py-3">Longitudine</th>
+      </div>
       {
         data.map((el) => 
-          <p>
+          <div>
+            { el.pools }
             { el.distance }
-            {/* TODO */}
-          </p>
+            { el.bpm }
+            { el.gps.latitude }
+            { el.gps.longitude }
+          </div>
         )
       }
     </>
