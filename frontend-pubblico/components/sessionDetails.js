@@ -13,7 +13,6 @@ export default function SessionDetails({sessionId, detailsAreShown}) {
       .then((res) => res.json())
       .then((data) => {
         data = data.map(el => {
-          console.log('bibihi',el.distance)
           return el
         })
         setData(data);
@@ -24,10 +23,9 @@ export default function SessionDetails({sessionId, detailsAreShown}) {
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No data</p>;
 
-  console.log('ihuhi', data)
   if(!detailsAreShown) return <></>
 
-  let prova = (
+  let details = (
     <>
       <div>
         <th scope="col" className="px-6 py-3">Vasche</th>
@@ -50,5 +48,5 @@ export default function SessionDetails({sessionId, detailsAreShown}) {
     </>
   )
 
-  return prova
+  return details
 }

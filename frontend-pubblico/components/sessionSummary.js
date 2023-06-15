@@ -7,7 +7,7 @@ export default function SessionSummary({props}) {
 
   return (
     <div>
-      <div onClick={() => setDetailsAreShown(!detailsAreShown)} >
+      <div onClick={() => setDetailsAreShown(!detailsAreShown)} className='cursor-pointer'>
         <td key="{props.start}" className="px-6 py-3">{props.start}</td>
         <td key="{props.end}" className="px-6 py-3">{props.end}</td>
         <td key="{props.totalDistance}" className="px-6 py-3">{props.totalDistance}</td>
