@@ -6,9 +6,11 @@ export default function LoginComponent() {
     return(
         <section className="bg-gray-50 dark:bg-gray-900">
             <div className="flex flex-col items-center justify-center md:h-screen lg:py-0">
-                <a className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                    <Image src={logo} width={150} />
-                    Earth4Sport
+                <a className="flex items-center mb-6 text-4xl font-mono font-semibold text-gray-900 dark:text-white">
+                    <Image src={logo} width={75} />
+                    <span className="ml-2 text-[#3f48cc]">EARTH</span>
+                    <span className="text-green-600">4</span>
+                    <span className="text-[#3f48cc]">SPORT</span>
                 </a>
                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

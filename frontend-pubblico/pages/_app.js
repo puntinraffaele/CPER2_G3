@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
             <div className="flex w-full justify-between items-center ml-4" id="navbarSupportedContentY">
                 <a href="/" className="flex items-center text-xl justify-start" >
                     <Image src={logo} width={30} alt={"logo"}/>
-                    <span className="ml-2 text-[#3f48cc] drop-shadow-lg">EARTH</span>
+                    <span className="ml-2 text-[#3f48cc]">EARTH</span>
                     <span className="text-green-600">4</span>
                     <span className="text-[#3f48cc]">SPORT</span>
                 </a>
