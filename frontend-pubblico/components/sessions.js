@@ -35,12 +35,13 @@ export default function Sessions({clockId}) {
 
   let table = (
     <>
-      <th scope="col" className="px-6 py-3">Inizio</th>
+    <tr>
       <th scope="col" className="px-6 py-3 ">Inizio</th>
       <th scope="col" className="px-6 py-3">Fine</th>
       <th scope="col" className="px-6 py-3">Distanza</th>
       <th scope="col" className="px-6 py-3">Vasche</th>
       <th scope="col" className="px-6 py-3">Bpm</th>
+    </tr>
       {
         data.map((el, rowIndex) => <SessionSummary props={el} />
         //  <><tr key={rowIndex} className="cursor-pointer divide-x divide-gray-700 bg-gray-900" 
