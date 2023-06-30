@@ -1,6 +1,7 @@
 
 import Image from "next/image";
 import logo from '../public/logo.png'
+import { signIn } from 'next-auth/react';
 
 export default function LoginComponent() {
     return(
@@ -47,7 +48,9 @@ export default function LoginComponent() {
                             </div>
                             <button type="submit" className="w-full bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none 
                             focus:ring-primary-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-primary-600 
-                            dark:hover:bg-primary-700 dark:focus:ring-primary-800 text-xl bg-blue-300 text-white">Accedi</button>
+                            dark:hover:bg-primary-700 dark:focus:ring-primary-800 text-xl bg-blue-300 text-white" onClick={() => {
+                              signIn()
+                            }}>Accedi</button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 Non hai un account?
                                 <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500 ml-1">

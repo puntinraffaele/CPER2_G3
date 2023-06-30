@@ -29,40 +29,41 @@ export default function SessionDetails({ sessionId, detailsAreShown }) {
 
 
   let details = (
-    <>
+    <div style={{textAlign: "center", background: "#e2e2e2", width: "850px", borderRadius: "0 0 15px 15px"}}>
       <Graph data={data} />
-      <div>
-        <canvas id="chart"></canvas>
-      </div>
-      <tr>
-        <th scope="col" className="px-6 py-3">Vasche</th>
-        <th scope="col" className="px-6 py-3">Distanza</th>
-        <th scope="col" className="px-6 py-3">Bpm</th>
-        <th scope="col" className="px-6 py-3">Latitudine</th>
-        <th scope="col" className="px-6 py-3">Longitudine</th>
-      </tr>
-      {
-        data.map((el) =>
-          <tr className='text-center'>
-            <td>
-              {el.pools}
-            </td>
-            <td>
-              {el.distance.toFixed(2)} metri
-            </td>
-            <td>
-              {el.bpm}
-            </td>
-            <td>
-              {el.gps.latitude.toFixed(4)}
-            </td>
-            <td>
-              {el.gps.longitude.toFixed(4)}
-            </td>
+      <div className='flex justify-center'>
+        <div>
+          <tr>
+            <th scope="col" className="px-6 py-3">Vasche</th>
+            <th scope="col" className="px-6 py-3">Distanza (m)</th>
+            <th scope="col" className="px-6 py-3">Bpm</th>
+            <th scope="col" className="px-6 py-3">Latitudine</th>
+            <th scope="col" className="px-6 py-3">Longitudine</th>
           </tr>
-        )
-      }
-    </>
+          {
+            data.map((el) =>
+              <tr>
+                <td>
+                  {el.pools}
+                </td>
+                <td>
+                  {el.distance.toFixed(2)}
+                </td>
+                <td>
+                  {el.bpm}
+                </td>
+                <td>
+                  {el.gps.latitude.toFixed(4)}
+                </td>
+                <td>
+                  {el.gps.longitude.toFixed(4)}
+                </td>
+              </tr>
+            )
+          }
+        </div>
+      </div>
+    </div>
   )
 
   return details

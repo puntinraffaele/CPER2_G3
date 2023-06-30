@@ -55,16 +55,19 @@ export default function Graph({ data }) {
         });
     }, [])
     return (
-        <>
-            <h1 className="  mx-auto mt-10 text-xl font-semibold capitalize ">Distance</h1>
-            <div className="  flex mx-auto my-auto">
-                <div className='border border-gray-400 pt-0 rounded-xl  w-2/4 h-fit my-auto  shadow-xl'>
+        <>  
+            <div className='flex flex-row'>
+                <span className="  ml-8 text-xl font-semibold capitalize ">Distanza</span>
+                <span className="  ml-[40%] text-xl font-semibold capitalize ">BPM</span> 
+            </div>
+
+            <div className='flex flex-row justify-evenly'>
+                    
+                <div className='border border-gray-400 pt-0 rounded-xl  w-[45%] h-fit my-auto  shadow-l'>
                     <canvas id='distanceChart'></canvas>
                 </div>
-            </div>
-            <h1 className="  mx-auto mt-10 text-xl font-semibold capitalize ">BPM</h1>
-            <div className=" flex mx-auto my-auto">
-                <div className='border border-gray-400 pt-0 rounded-xl  w-2/4 h-fit my-auto  shadow-xl'>
+                
+                <div className='border border-gray-400 pt-0 rounded-xl  w-[45%] h-fit my-auto  shadow-l'>
                     <canvas id='bpmChart'></canvas>
                 </div>
             </div>

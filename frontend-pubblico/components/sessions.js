@@ -34,9 +34,9 @@ export default function Sessions({clockId}) {
   if (!data) return <p>No data</p>;
 
   let table = (
-    <>
+    <div className='mx-80'>
     <tr>
-      <th scope="col" className="px-6 py-3 ">Inizio</th>
+      <th scope="col" className="px-6 py-3">Inizio</th>
       <th scope="col" className="px-6 py-3">Fine</th>
       <th scope="col" className="px-6 py-3">Distanza</th>
       <th scope="col" className="px-6 py-3">Vasche</th>
@@ -55,7 +55,7 @@ export default function Sessions({clockId}) {
         // </>
         )
       }
-    </>
+    </div>
   )
 
   return table
