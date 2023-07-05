@@ -25,8 +25,12 @@ export default function SessionDetails({ sessionId, detailsAreShown }) {
       });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No data</p>;
+  if (isLoading) return (<>
+    <p>Loading...</p>
+  </>);
+  if (!data) return (<>
+    <p>No data</p>
+  </>);
 
   if (!detailsAreShown) return <></>
 

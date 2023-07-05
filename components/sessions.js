@@ -10,10 +10,6 @@ export default function Sessions() {
   const [isLoading, setLoading] = useState(false);
   const [selectedSession, setSelectedSession] = useState(null);
 
-  const ViewSessionDetails = (sessionId) => {
-    setSelectedSession(sessionId)
-  }
-
   useEffect(async () => {
     setLoading(true);
     let clocks = await fetch(c_url, {
@@ -27,22 +23,34 @@ export default function Sessions() {
         "Bearer": sessionStorage.getItem('jwt_bearer')
       }
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        else
+          return null
+      })
       .then((data) => {
-        data = data.map(el => {
-          el.start = new Date(el.start).toLocaleString('it')
-          el.end = new Date(el.end).toLocaleString('it')
-          el.totalDistance = el.totalDistance.toFixed(2)
-          el.avgBpm = el.avgBpm.toFixed(2)
-          return el
-        })
+        console.log(data)
+        if (data)
+          data = data.map(el => {
+            el.start = new Date(el.start).toLocaleString('it')
+            el.end = new Date(el.end).toLocaleString('it')
+            el.totalDistance = el.totalDistance.toFixed(2)
+            el.avgBpm = el.avgBpm.toFixed(2)
+            return el
+          })
         setData(data);
         setLoading(false);
       });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No data</p>;
+  if (isLoading) return (<>
+    <p>Loading...</p>
+  </>);;
+  if (!data) return (<>
+    <p>No data</p>
+  </>);
 
   let table = (
     <div className='mx-80'>
