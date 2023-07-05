@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { baseURL } from '../utils/urls';
 import SessionSummary from './sessionSummary';
 
-const url = baseURL + 'get_sessions_list/'
+const url = baseURL + 'sessions_list'
+const c_url = baseURL + 'user_clocks'
 
-export default function Sessions({clockId}) {
+export default function Sessions() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [selectedSession, setSelectedSession] = useState(null);
@@ -13,9 +14,19 @@ export default function Sessions({clockId}) {
     setSelectedSession(sessionId)
   }
 
-  useEffect(() => {
+  useEffect(async () => {
     setLoading(true);
-    fetch(url + clockId)
+    let clocks = await fetch(c_url, {
+      headers: {
+        "Bearer": sessionStorage.getItem('jwt_bearer')
+      }
+    }).then((res) => res.json());
+    // console.log(clocks);
+    await fetch(url + '/' + clocks[0], {
+      headers: {
+        "Bearer": sessionStorage.getItem('jwt_bearer')
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
         data = data.map(el => {
@@ -35,24 +46,24 @@ export default function Sessions({clockId}) {
 
   let table = (
     <div className='mx-80'>
-    <tr>
-      <th scope="col" className="px-6 py-3">Inizio</th>
-      <th scope="col" className="px-6 py-3">Fine</th>
-      <th scope="col" className="px-6 py-3">Distanza</th>
-      <th scope="col" className="px-6 py-3">Vasche</th>
-      <th scope="col" className="px-6 py-3">Bpm</th>
-    </tr>
+      <tr>
+        <th scope="col" className="px-6 py-3">Inizio</th>
+        <th scope="col" className="px-6 py-3">Fine</th>
+        <th scope="col" className="px-6 py-3">Distanza</th>
+        <th scope="col" className="px-6 py-3">Vasche</th>
+        <th scope="col" className="px-6 py-3">Bpm</th>
+      </tr>
       {
         data.map((el, rowIndex) => <SessionSummary props={el} />
-        //  <><tr key={rowIndex} className="cursor-pointer divide-x divide-gray-700 bg-gray-900" 
-        // onClick={() => ViewSessionDetails(el.id)}>
-        //   <td key="{el.start}" className="px-6 py-3">{el.start}</td>
-        //   <td key="{el.end}" className="px-6 py-3">{el.end}</td>
-        //   <td key="{el.totalDistance}" className="px-6 py-3">{el.totalDistance}</td>
-        //   <td key="{el.totalPools}" className="px-6 py-3">{el.totalPools}</td>
-        //   <td key="{el.avgBpm}" className="px-6 py-3">{el.avgBpm}</td>
-        // </tr>
-        // </>
+          //  <><tr key={rowIndex} className="cursor-pointer divide-x divide-gray-700 bg-gray-900" 
+          // onClick={() => ViewSessionDetails(el.id)}>
+          //   <td key="{el.start}" className="px-6 py-3">{el.start}</td>
+          //   <td key="{el.end}" className="px-6 py-3">{el.end}</td>
+          //   <td key="{el.totalDistance}" className="px-6 py-3">{el.totalDistance}</td>
+          //   <td key="{el.totalPools}" className="px-6 py-3">{el.totalPools}</td>
+          //   <td key="{el.avgBpm}" className="px-6 py-3">{el.avgBpm}</td>
+          // </tr>
+          // </>
         )
       }
     </div>

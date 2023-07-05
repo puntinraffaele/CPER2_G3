@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { baseURL } from '../utils/urls';
 import Graph from '../components/graph.js'
 
-const url = baseURL + 'get_session_data/'
+const url = baseURL + 'session_data/'
 
 export default function SessionDetails({ sessionId, detailsAreShown }) {
   const [data, setData] = useState(null);
@@ -10,7 +10,11 @@ export default function SessionDetails({ sessionId, detailsAreShown }) {
 
   useEffect(() => {
     setLoading(true);
-    fetch(url + '3d8cf0e2-ef19-4471-bceb-651057311f3d' + '/' + sessionId)
+    fetch(url + '3d8cf0e2-ef19-4471-bceb-651057311f3d' + '/' + sessionId, {
+      headers: {
+        "Bearer": sessionStorage.getItem('jwt_bearer')
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
         data = data.map(el => {
@@ -29,7 +33,7 @@ export default function SessionDetails({ sessionId, detailsAreShown }) {
 
 
   let details = (
-    <div style={{textAlign: "center", background: "#e2e2e2", width: "850px", borderRadius: "0 0 15px 15px"}}>
+    <div style={{ textAlign: "center", background: "#e2e2e2", width: "850px", borderRadius: "0 0 15px 15px" }}>
       <Graph data={data} />
       <div className='flex justify-center'>
         <div>
