@@ -9,8 +9,8 @@ export default function Graph({ data }) {
             data: {
                 labels: data.map(el => new Date(el.timeStamp).toLocaleTimeString()),
                 datasets: [{
-                    data: data.map(el => el.distance),
-                    label: "Distanza",
+                    data: data.map((el, key)=> (el.distance - data[key-1 < 0 ? key : key-1].distance)/3.6),
+                    label: "Velocita",
                     borderColor: "#00f",
                     backgroundColor: "#00f",
                     fill: false,
