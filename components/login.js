@@ -1,7 +1,6 @@
 import { baseURL } from '../utils/urls'
-import { useRouter } from 'next/router'
-import { redirect } from "next/dist/server/api-utils";
-import { useEffect, useState } from 'react'
+const logo = './logo.png'
+import { useState } from 'react'
 
 export default function LoginComponent() {
 
@@ -37,6 +36,7 @@ export default function LoginComponent() {
             <div className="bg-gray-50 dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center md:h-screen lg:py-0">
                     <a className="flex items-center mb-6 text-4xl font-mono font-semibold text-gray-900 dark:text-white">
+                        <img src={logo} className='w-8'></img>
                         <span className="ml-2 text-[#3f48cc]">EARTH</span>
                         <span className="text-green-600">4</span>
                         <span className="text-[#3f48cc]">SPORT</span>

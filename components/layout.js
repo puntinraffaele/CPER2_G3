@@ -1,8 +1,8 @@
-const logo = '../public/logo.png'
+const logo = './logo.png'
 import { useEffect, useState } from 'react'
 import LoginComponent from './login';
 
-export default function Layout({ children, logo }) {
+export default function Layout({ children }) {
     const [loggedIn, setLoggedIn] = useState(true)
     useEffect(() => {
         setLoggedIn(false)
@@ -25,7 +25,7 @@ export default function Layout({ children, logo }) {
                     className="flex w-full items-center justify-start bg-white py-2 text-gray-600 shadow-lg font-mono font-semibold" data-te-navbar-ref>
                     <div className="flex w-full justify-between items-center ml-4" id="navbarSupportedContentY">
                         <div className="flex items-center text-xl justify-start" >
-                            <img src={logo}></img>
+                            <img className='w-6 h-6' src={logo}></img>
                             <span className="ml-2 text-[#3f48cc]">EARTH</span>
                             <span className="text-green-600">4</span>
                             <span className="text-[#3f48cc]">SPORT</span>
