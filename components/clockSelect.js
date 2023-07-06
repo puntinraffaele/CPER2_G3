@@ -1,3 +1,38 @@
+import gotoSession from '../utils/functions';
 import { baseURL } from '../utils/urls';
+import { useEffect, useState } from 'react'
 
-// fare fetch a lista orologi x utente, poi select dell'orologio scelto. l'uuid dell'orologio scelto diventa l'uuid di sessions
+const url = baseURL + 'user_clocks/'
+
+export default function ClockSelect() {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+  const [page, setPage] = useState();
+  useEffect(() => {
+    setLoading(true);
+    fetch(url, {
+      headers: {
+        "Bearer": sessionStorage.getItem('jwt_bearer')
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        data = data.map(el => {
+          return el
+        })
+        setData(data);
+        setPage(data.map((d, key )=> <p key={key} onClick={() => setPage(gotoSession(d))}>{d}</p>))
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading) return (<>
+    <p>Loading...</p>
+  </>);
+  if (!data) return (<>
+    <p>No data</p>
+  </>);
+  return <>
+    {page}
+  </>
+}

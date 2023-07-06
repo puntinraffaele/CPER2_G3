@@ -57,7 +57,7 @@ export default function Graph({ data }) {
     return (
         <>  
             <div className='flex flex-row'>
-                <span className="  ml-8 text-xl font-semibold capitalize ">Velocità</span>
+                <span className="  ml-8 text-xl font-semibold capitalize ">Velocità (Km/h)</span>
                 <span className="  ml-[40%] text-xl font-semibold capitalize ">BPM</span> 
             </div>
 

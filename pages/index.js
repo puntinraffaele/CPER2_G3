@@ -3,21 +3,22 @@ import styles from '../styles/Home.module.css';
 import Sessions from '../components/sessions';
 import LoginComponent from '../components/login';
 import { useEffect, useState } from 'react'
+import ClockSelect from '../components/clockSelect';
 
 export default function Home() {
-  const [page, loadFunc] = useState(function () { })
-  useEffect(() => loadFunc(function () {
+  const [page, setPage] = useState()
+  useEffect(() => setPage(function () {
     if (typeof window !== 'undefined') {
       if (sessionStorage.getItem('jwt_bearer')) {
         try {
           return (
             <>
-              <Sessions />
+              <ClockSelect/>
             </>
           )
 
         } catch (error) {
-          console.log(`Redirected to login, reason: ${err.message}`)
+          console.log(`Redirected to login, reason: ${error.message}`)
           return (
             <>
               <LoginComponent></LoginComponent>

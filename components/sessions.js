@@ -5,7 +5,7 @@ import SessionSummary from './sessionSummary';
 const url = baseURL + 'sessions_list'
 const c_url = baseURL + 'user_clocks'
 
-export default function Sessions() {
+export default function Sessions({clockId}) {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [selectedSession, setSelectedSession] = useState(null);
@@ -18,7 +18,7 @@ export default function Sessions() {
       }
     }).then((res) => res.json());
     // console.log(clocks);
-    await fetch(url + '/' + clocks[0], {
+    await fetch(url + '/' + clockId, {
       headers: {
         "Bearer": sessionStorage.getItem('jwt_bearer')
       }
