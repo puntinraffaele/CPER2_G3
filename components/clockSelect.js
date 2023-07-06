@@ -21,7 +21,7 @@ export default function ClockSelect() {
           return el
         })
         setData(data);
-        setPage(data.map((d, key )=> <p key={key} onClick={() => setPage(gotoSession(d))}>{d}</p>))
+        setPage(<><h5>Seleziona un orlogio:</h5>{data.map((d, key )=> <p key={key} onClick={() => setPage(gotoSession(d))}>{d}</p>)}</>)
         setLoading(false);
       });
   }, []);
